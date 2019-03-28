@@ -179,11 +179,23 @@ def ejercicio_templates(request):
 
 
 import requests as requests
-def titulares(request):
-    r = requests.get('http://ep00.epimg.net/rss/tags/ultimas_noticias.xml')
-    print(r)
+# from xml.etree import ElementTree
 
-    pass
+def titulares(request):
+    url = 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'
+    response = requests.get(url)
+
+    # tree = ElementTree.fromstring(response.content)
+    texto = response.content
+    print(re.findall(r'<title><!\[CDATA\[(.+?)\]\]><\/title>', response.text))
+
+
+    salida = '''<html>
+                    blabla
+                </html>
+                '''
+
+    return HttpResponse(salida)
 
 
 
