@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<table class="table table-sm table-hover">
+
+  <tr>
+    <th>Título</th><th>Año</th>
+  </tr>
+
+  {% for l in lista %}
+    <tr>
+      <td> {{ l.title }} </td><td> {{l.year}} </td>
+    </tr>
+  {% endfor %}
+
+</table>
+
+{% endblock %}

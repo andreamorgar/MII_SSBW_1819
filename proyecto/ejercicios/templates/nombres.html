@@ -1,0 +1,25 @@
+<html>
+
+  <head>
+  <title>Ejercicio de expresiones regulares</title>
+  </head>
+
+  <body>
+  Estadísticas del año {{ año }}
+
+    <table>
+      <tr>
+        <th>Nombre</th><th>número</th>
+      </tr>
+
+      {% for l in lista %}
+        <tr>
+          <td> {{ l.nombre }} </td><td> {{l.numero}} </td>
+        </tr>
+      {% endfor %}
+
+    </table>
+
+  </body>
+
+</html>
