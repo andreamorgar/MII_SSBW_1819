@@ -1,5 +1,5 @@
 
-Primero nos creamos las claves siguiendo los pasos (aquí)[https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04]
+Primero nos creamos las claves siguiendo los pasos [aquí](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04)
 ~~~
 $ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
 ~~~
@@ -62,4 +62,4 @@ $ sudo docker-compose up
 ~~~
 
 Al entrar a una página con el puerto 80 (no el 8000), redirecciona a https automáticamente (está especificado en el fichero de configuración). La primera vez nos pide que agreguemos un certificado, una vez sigamos los pasos, ya accederemos de forma segura. Las siguientes veces, saldrá ya directamente el candado junto a la barra de direcciones.
-Además, si consultamos la terminal, podremos ver los logs de nginx funcionando cada vez que hagamos una consulta bajo el puerto 80. 
+Además, si consultamos la terminal, podremos ver los logs de nginx funcionando cada vez que hagamos una consulta bajo el puerto 80.
