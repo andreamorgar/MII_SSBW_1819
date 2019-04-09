@@ -1,0 +1,5 @@
+body{background-color: blue;}
+#t1{
+  background-color: pink;
+}
+#t1:hover{background-color: purple;}

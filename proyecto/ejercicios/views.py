@@ -179,7 +179,16 @@ def ejercicio_templates(request):
 
 
 import requests as requests
+
+from requests.packages.urllib3.util.retry import Retry
+retry = Retry(connect=3, backoff_factor=0.5)
 # from xml.etree import ElementTree
+
+
+
+import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 
 def titulares(request):
     url = 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'
@@ -196,7 +205,6 @@ def titulares(request):
                 '''
 
     return HttpResponse(salida)
-
 
 
 from pymongo import *

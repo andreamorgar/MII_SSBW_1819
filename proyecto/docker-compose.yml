@@ -31,6 +31,18 @@ services:
     depends_on:
       - mongo
 
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./conf:/etc/nginx/conf.d:ro
+      - ./cert:/etc/ssl/private:ro
+    depends_on:
+      - web
+
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
