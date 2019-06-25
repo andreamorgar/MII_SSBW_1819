@@ -1,0 +1,20 @@
+{% block content %}
+
+{% if lista %}
+<br></<br>
+
+  <table class="table table-sm table-hover" id="t1">
+
+    <tr>
+      <th>Título</th><th>Director</th><th>Año</th>
+    </tr>
+
+    {% for l in lista %}
+      <tr>
+        <td> {{ l.title }} </td><td> {{l.director}} </td><td> {{l.year}} </td>
+      </tr>
+    {% endfor %}
+
+  </table>
+{% endif %}
+{% endblock %}

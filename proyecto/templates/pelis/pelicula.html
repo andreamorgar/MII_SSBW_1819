@@ -1,0 +1,79 @@
+{% block infopeli %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/estilos-pelicula.css" %}">
+
+
+  <title>{{ peli.title }}</title>
+
+</head>
+<body>
+
+  <h1>Título</h1>
+  <h6>{{ peli.title }}</h6>
+  <hr>
+
+  <h1>Resumen</h1>
+  <h6>{{ peli.plot }}</h6>
+  <hr>
+
+  <h1>Año</h1>
+  <h6>{{ peli.year }}</h6>
+  <hr>
+
+  <h1>Director</h1>
+  <h6>{{ peli.director }}</h6>
+  <hr>
+
+  <h1>Duración</h1>
+  <h6>{{ peli.runtime }}</h6>
+  <hr>
+
+  <h1>Puntuación</h1>
+  <h6>{{ peli.rated }}</h6>
+  <hr>
+
+  <h1>Géneros</h1>
+  {% for p in peli.genres %}
+  <h6>{{ p }}</h6>
+  {% endfor %}
+  <hr>
+
+
+  <h1>Premios: {{peli.awards.text}}</h1>
+  <h6> Galardones: {{ galardones }}</h6>
+  <h6>Nominaciones: {{ nominaciones }}</h6>
+  <hr>
+
+  <h1>Poster</h1>
+  <img style="max-width:100%;" src="{{ url_imagen }}" />
+  <hr>
+  <h1>Géneros</h1>
+  {% for p in peli.actors %}
+  <h6>{{ p }}</h6>
+  {% endfor %}
+  <hr>
+  <h1>Guionistas</h1>
+  {% for p in peli.genres %}
+  <h6>{{ p }}</h6>
+  {% endfor %}
+  <hr>
+  <h1>Países</h1>
+  {% for p in peli.countries %}
+  <h6>{{ p }}</h6>
+  {% endfor %}
+  <hr>
+
+  <h1>Puntuación de IMDB {{peli.imdb.rating}}</h1>
+  <h6> Votos: {{ votos_imdb }}</h6>
+  <hr>
+
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% block formulario %}
+
+<form class="form-inline" action="vista_crud" method="post">
+  {% csrf_token %}
+  <label class="sr-only" for="inputActor">Actor</label>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Actor</div>
+    </div>
+    <input type="text" class="form-control" id="inputActor" placeholder="Actor" name="var_actor" value="{{ value_actor }}">
+  </div>
+
+  <label class="sr-only" for="year">Año</label>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Año</div>
+    </div>
+    <input type="text" class="form-control" id="year" placeholder="Año" name="var_year" value="{{ value_year }}">
+  </div>
+
+  <label class="sr-only" for="genres">Género</label>
+     <div class="input-group mb-2 mr-sm-2">
+       <div class="input-group-prepend">
+         <div class="input-group-text">Género</div>
+       </div>
+
+       <select class="custom-select mr-sm-2" id="genres" name="var_genres">
+         {% if value_genero == ""%}
+         <option selected>Seleccionar</option>
+         {% else %}
+         <option>Seleccionar</option>
+         {% endif %}
+
+         {% for genero in generos %}
+           {% if genero == value_genero %}
+             <option selected value="{{ genero }}">{{ genero }}</option>
+           {% else %}
+             <option value="{{ genero }}">{{ genero }}</option>
+           {% endif %}
+         {% endfor %}
+
+        </select>
+     </div>
+
+
+
+
+  <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Buscar</button>
+  <a class="btn btn-primary mb-2" href="/pelis/tarea7/vista_crud" role="button">Mostrar todos</a>
+
+  {% if user_autenticado == "no"%}
+    <a class="btn btn-primary mb-2 mr-sm-3" href="/accounts/login" role="button">Login</a>
+  {% else %}
+    <a class="btn btn-primary mb-2 mr-sm-3" href="/accounts/logout" role="button">Logout</a>
+
+  {% endif %}
+
+</form>
+
+
+{% endblock %}

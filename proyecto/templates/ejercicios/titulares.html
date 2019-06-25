@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/estilos.css" %}">
+
+    <title>Últimas noticias</title>
+  </head>
+
+  <body>
+    <h1>{{ titulo }}</h1>
+    <hr>
+
+    {% for l in lista %}
+    <p id=p1>{{ l }}</p>
+    {% endfor %}
+  </body>
+
+</html>

@@ -17,7 +17,26 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
+from django.conf import settings
+from django.contrib.auth import views as auth_views
+
+from pelis import views
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
     url(r'^ejercicios/',include('ejercicios.urls')),
+    url(r'^pelis/',include('pelis.urls')),
+
+
+
+    path('admin/', admin.site.urls),
+    # # Uncomment the admin/doc line below to enable admin documentation:
+    #  url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    #
+    # # Uncomment the next line to enable the admin:
+    #  url(r'^admin/', include(admin.site.urls)),
+
+
+    # para tarea 9
+    path('accounts/', include('allauth.urls')),
+    path('', views.vista_crud, name='vamo'),
 ]

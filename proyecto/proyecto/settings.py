@@ -26,6 +26,7 @@ SECRET_KEY = '9urx(yi!ua(bbu(*&9=7$8a49rgksunx6nnjhhbik42c!@r)i7'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# SITE_ID = 1
 
 
 # Application definition
@@ -37,7 +38,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'ejercicios',
+    'pelis',
+
+    # añadido para tarea 9
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # Add tarea 9
+    # 'django.contrib.auth',  #Core authentication framework and its default models.
+    # 'django.contrib.contenttypes',  #Django content type system (allows permissions to be associated with models).
+
+    # Tarea 12
+    'rest_framework',
+    'rest_framework_mongoengine',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +65,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
+    # add tarea 9
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+
 ]
 
 ROOT_URLCONF = 'proyecto.urls'
@@ -55,7 +78,7 @@ ROOT_URLCONF = 'proyecto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,4 +141,74 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# STATICFILES_DIR = [
+#     os.path.join(BASE_DIR,"static"),
+# ]
+
 STATIC_URL = '/static/'
+# STATIC_ROOT = ''
+# STATICFILES_DIR = (os.path.join('static'),)
+
+
+
+LOG_FILE = 'proyecto_logs.log'
+
+LOGGING = {
+	 'version': 1,
+	 'disable_existing_loggers': False,
+
+	  'formatters': {
+	       'verbose': {
+             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+              'datefmt' : "%d/%b/%Y %H:%M:%S"
+	        },
+           'simple': {
+             'format': '%(levelname)s [%(name)s:%(lineno)s] %(message)s'
+	           },
+	       },
+
+	       'handlers': {
+	           'file': {
+	               'level': 'INFO',
+	               'class': 'logging.FileHandler',
+	               'filename': os.path.join(BASE_DIR, LOG_FILE),
+	               'formatter': 'verbose',
+	               'mode':'w'
+	            },
+	            'console': {
+	                'level': 'DEBUG',
+	                'class': 'logging.StreamHandler',
+	                'formatter': 'simple'
+	            }
+	        },
+
+	        'loggers': {
+	            'django': {
+	                'handlers':['file'],
+	                'propagate': True,
+	                'level':'ERROR',
+	             },
+	             'mi_instagram': {
+	                'handlers': ['file', 'console'],
+	                 'level': 'DEBUG',
+	              },
+	          }
+	     }
+
+
+# ------------------------------------------------------------------------------
+
+AUTHENTICATION_BACKENDS = (
+  'django.contrib.auth.backends.ModelBackend',
+  'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+
+
+
+# ------------------------------------------------------------------------------
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/pelis/tarea7/vista_crud' #necesario para poder hacer login
+LOGOUT_REDIRECT_URL = '/pelis/tarea7/vista_crud'

@@ -1,3 +1,7 @@
 Django>=2.0,<3.0
 requests==2.21.0
 mongoengine==0.16
+django-mongoengine-forms==0.4.6
+django-allauth==0.39.1
+djangorestframework
+django-rest-framework-mongoengine

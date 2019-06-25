@@ -1,0 +1,89 @@
+{% block formulario %}
+
+<form class="form-inline" action="busqueda" method="post">
+  {% csrf_token %}
+  <label class="sr-only" for="inputActor">Actor</label>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Actor</div>
+    </div>
+    <input type="text" class="form-control" id="inputActor" placeholder="Actor" name="var_actor" value="{{ value_actor }}">
+  </div>
+
+  <label class="sr-only" for="year">Año</label>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Año</div>
+    </div>
+    <input type="text" class="form-control" id="year" placeholder="Año" name="var_year" value="{{ value_year }}">
+  </div>
+
+  <label class="sr-only" for="genres">Género</label>
+     <div class="input-group mb-2 mr-sm-2">
+       <div class="input-group-prepend">
+         <div class="input-group-text">Género</div>
+       </div>
+
+       <select class="custom-select mr-sm-2" id="genres" name="var_genres">
+         {% if value_genero == ""%}
+         <option selected>Seleccionar</option>
+         {% else %}
+         <option>Seleccionar</option>
+         {% endif %}
+
+         {% for genero in generos %}
+           {% if genero == value_genero %}
+             <option selected value="{{ genero }}">{{ genero }}</option>
+           {% else %}
+             <option value="{{ genero }}">{{ genero }}</option>
+           {% endif %}
+         {% endfor %}
+
+        </select>
+     </div>
+
+
+
+
+  <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Buscar</button>
+  <a class="btn btn-primary mb-2" href="/ejercicios/tarea5/busqueda" role="button">Mostrar todos</a>
+</form>
+
+
+{% endblock %}
+
+
+
+<!-- <div class="form-group">
+  <label for="inputAddress">Address</label>
+  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+</div>
+<div class="form-group">
+  <label for="inputAddress2">Address 2</label>
+  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+</div>
+<div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="inputCity">City</label>
+    <input type="text" class="form-control" id="inputCity">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="inputState">State</label>
+    <select id="inputState" class="form-control">
+      <option selected>Choose...</option>
+      <option>...</option>
+    </select>
+  </div>
+  <div class="form-group col-md-2">
+    <label for="inputZip">Zip</label>
+    <input type="text" class="form-control" id="inputZip">
+  </div>
+</div>
+<div class="form-group"> -->
+  <!-- <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="gridCheck">
+    <label class="form-check-label" for="gridCheck">
+      Check me out
+    </label>
+  </div> -->
+<!-- </div> -->

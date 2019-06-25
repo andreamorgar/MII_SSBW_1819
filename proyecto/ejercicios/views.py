@@ -4,15 +4,13 @@ from django.shortcuts import HttpResponse
 import random
 import re
 from requests import *
-# import requests
 
-
-# def hola_mundo(request):
-#     salida = '''<html>
-#                     Hola mundo
-#                 </html>
-#                 '''
-#     return HttpResponse(salida)
+def hola_mundo_basico(request):
+    salida = '''<html>
+                    Hola mundo
+                </html>
+                '''
+    return HttpResponse(salida)
 
 
 def hola_mundo(request,usuario):
@@ -22,7 +20,6 @@ def hola_mundo(request,usuario):
                 ''' % (usuario)
 
     return HttpResponse(salida)
-
 
 #pasamos lista con elementos separados por espacio
 def ejercicio_1(request,lista):
@@ -175,7 +172,7 @@ def ejercicio_templates(request):
 
     }
 
-    return render(request, 'nombres.html', context)
+    return render(request, 'ejercicios/nombres.html', context)
 
 
 import requests as requests
@@ -196,22 +193,55 @@ def titulares(request):
 
     # tree = ElementTree.fromstring(response.content)
     texto = response.content
-    print(re.findall(r'<title><!\[CDATA\[(.+?)\]\]><\/title>', response.text))
+    res = re.findall(r'<title><!\[CDATA\[(.+?)\]\]><\/title>', response.text)
+    print(str(res))
+    print(type(res))
+    print("Numero titulares: "+ str(len(res)))
 
 
-    salida = '''<html>
-                    blabla
-                </html>
-                '''
+    # salida = '''<html>
+    #                 blabla
+    #             </html>
+    #             '''
+    # return HttpResponse(salida)
 
-    return HttpResponse(salida)
+    context = {
+    'titulo':res[0],
+    'lista': res[1:] # los dos primeros no son info de titulares
+    }
+    return render(request, 'ejercicios/titulares.html', context)
+
+
+def portada(request):
+    url = 'http://ep00.epimg.net/rss/tecnologia/portada.xml'
+    response = requesyear_formulariots.get(url)
+
+    # Primero obtenemos los titulares, de igual forma que antes
+    texto = response.content
+    titulares_ = re.findall(r'<title><!\[CDATA\[(.+?)\]\]><\/title>', response.text)
+    print("Numero titulares: "+ str(len(titulares_)))
+
+    imagenes_ = re.findall(r'<enclosure url="(.+?)"', response.text)
+    print("Numero de imágenes: "+ str(len(imagenes_)))
+
+    # salida = '''<html>
+    #                 blabla
+    #             </html>
+    #             '''
+    # return HttpResponse(salida)
+
+    context = {
+    'titulo':titulares_[0],
+    'lista': titulares_[1:] # los dos primeros no son info de titulares
+    }
+    return render(request, 'ejercicios/titulares.html', context)
+
 
 
 from pymongo import *
 client = MongoClient('mongo',27017)
 db = client.movies
 pelis = db.pelis
-
 
 def pymongo(request):
     lista = []
@@ -224,7 +254,7 @@ def pymongo(request):
     context = {
         'lista': lista
     }
-    return render(request,"salida.html",context)
+    return render(request,"ejercicios/salida.html",context)
 
 
 def get_pelis_pymongo(request,actor):
@@ -238,40 +268,92 @@ def get_pelis_pymongo(request,actor):
     }
 
 
-    return render(request,"table.html",context)
+    return render(request,"ejercicios/table.html",context)
 
 
 def busqueda_pelis(request):
+    context = {}
     lista = []
 
-    # lista = pelis.find({"year":int(actor)})
-    #
-    #
-    # context = {
-    #     'lista': lista
-    # }
+    # obtener géneros
+    lista_pelis = pelis.find({})
+
+    generos = []
+    for pelicula in lista_pelis:
+        for genero in pelicula["genres"]:
+            generos.append(genero)
+
+    set_generos = set(generos)
+
     if(request.method == 'POST'):
         actor_formulario = request.POST.get('var_actor')
-        # print(x)
         year_formulario = request.POST.get('var_year')
+        genero_formulario = request.POST.get('var_genres')
+        print(genero_formulario)
+    #     if actor_formulario != "" and year_formulario != "":
+    #         regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+    #         lista = pelis.find({"actors": regx, "year":int(year_formulario)})
+    #     elif year_formulario != "":
+    #         lista = pelis.find({"year":int(year_formulario)})
+    #     elif actor_formulario != "":
+    #         regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+    #         lista = pelis.find({"actors": regx})
+    #     else:
+    #         # lista = pelis.find()
+    #         lista = []
+    #
 
-        if actor_formulario == "":
-            lista = pelis.find({"year":int(year_formulario)})
-        elif year_formulario == "":
+        if actor_formulario != "" and year_formulario != "" and genero_formulario != "Seleccionar":
             regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
-            lista = pelis.find({"actors": regx})
+            regx_genres = re.compile("^"+ genero_formulario, re.IGNORECASE)
+            lista = pelis.find({"actors": regx, "year":int(year_formulario),"genres": regx_genres})
+        elif genero_formulario != "Seleccionar":
+            regx_genres = re.compile("^"+ genero_formulario, re.IGNORECASE)
+            if year_formulario != "":
+                lista = pelis.find({"year":int(year_formulario),"genres": regx_genres})
+            elif actor_formulario != "":
+                regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+                lista = pelis.find({"actors": regx,"genres": regx_genres})
+            else:
+                regx_genres = re.compile("^"+ genero_formulario, re.IGNORECASE)
         else:
-            regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
-            lista = pelis.find({"actors": regx, "year":int(year_formulario)})
+            if year_formulario != "":
+                lista = pelis.find({"year":int(year_formulario)})
+            elif actor_formulario != "":
+                regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+                lista = pelis.find({"actors": regx})
+            else:
+                lista = []
+
+
+
+        # necesario para quitar el float del año
+        lista_aux = [i for i in lista]
+        for i,peli in enumerate(lista_aux):
+            lista_aux[i]['year'] = int(peli['year'])
 
         context = {
-            'lista': lista
+            'value_genero':genero_formulario,
+            'value_actor': actor_formulario,
+            'value_year':year_formulario,
+            'lista': lista_aux,
+            'generos': list(set_generos),
         }
 
-        # if len(lista) == 0:
-        #     return render(request,"no_result.html")
-
-        return render(request,"table.html",context)
 
     else:
-        return render(request,"formulario.html")
+        lista = pelis.find()
+        # necesario para quitar el float del año
+        lista_aux = [i for i in lista]
+        for i,peli in enumerate(lista_aux):
+            lista_aux[i]['year'] = int(peli['year'])
+
+
+        context = {
+            'lista': lista_aux,
+            'generos': list(set_generos),
+        }
+
+
+
+    return render(request,"ejercicios/main.html",context)

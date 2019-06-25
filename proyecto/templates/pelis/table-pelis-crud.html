@@ -1,0 +1,40 @@
+{% block content %}
+
+{% if lista %}
+<br/><br/>
+
+<form method="GET">
+    <button type="submit" formaction="{% url 'create' %}" class="btn btn-primary">Nueva película</button>
+</form>
+
+  <table class="table table-sm table-hover" id="t1">
+
+    <!-- <tr>
+      <th style="width: '30%'">Título</th>
+      <th style="width: '10%'">Director</th>
+      <th style="width: '10%'">Año</th>
+      <th style="width: '50%'">Acciones</th>
+    </tr> -->
+
+    <tr>
+      <th width="30%">Título</th>
+      <th width="30%">Director</th>
+      <th width="10%">Año</th>
+      <th width="30%">Acciones</th>
+    </tr>
+
+    {% for l in lista %}
+      <!-- <tr onclick="window.location.href='pelicula/{{ l.id }}'" class="filaPeli"> -->
+        <tr class="filaPeli">
+        <td> {{ l.title }} </td>
+        <td> {{l.director}} </td>
+        <td> {{l.year}} </td>
+
+        <td><a href="{% url 'read' l.id %}">Ver más</a> <a href="{% url 'edit' l.id %}">Editar</a> <a href="{% url 'delete' l.id %}">Eliminar</a></td>
+
+      </tr>
+    {% endfor %}
+
+  </table>
+{% endif %}
+{% endblock %}
