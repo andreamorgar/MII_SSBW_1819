@@ -39,13 +39,14 @@ services:
     volumes:
       - ./conf:/etc/nginx/conf.d:ro
       - ./cert:/etc/ssl/private:ro
+      # - ./staticfiles:/usr/staticfiles
     depends_on:
       - web
 
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn proyecto.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
     ports:

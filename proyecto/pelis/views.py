@@ -72,6 +72,7 @@ def consulta_por_peli(request,id):
     nominaciones = ""
     votos_imdb = ""
     galardones = ""
+    year = ""
 
     if peli['awards']['wins'] is not None:
         galardones = int(peli['awards']['wins'])

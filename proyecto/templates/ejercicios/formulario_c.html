@@ -1,0 +1,36 @@
+{% block formulario %}
+
+<form id="formulario_c" action="busqueda_css" method="post">
+  {% csrf_token %}
+      <label for="inputActor">Actor</label>
+    <input type="text" id="inputActor" placeholder="Actor" name="var_actor" value="{{ value_actor }}">
+
+  <label for="year">Año</label>
+  <input type="text" id="year" placeholder="Año" name="var_year" value="{{ value_year }}">
+
+
+  <label class="sr-only" for="genres">Género</label>
+       <select class="custom-select mr-sm-2" id="genres" name="var_genres">
+         {% if value_genero == ""%}
+         <option selected>Seleccionar</option>
+         {% else %}
+         <option>Seleccionar</option>
+         {% endif %}
+
+         {% for genero in generos %}
+           {% if genero == value_genero %}
+             <option selected value="{{ genero }}">{{ genero }}</option>
+           {% else %}
+             <option value="{{ genero }}">{{ genero }}</option>
+           {% endif %}
+         {% endfor %}
+        </select>
+
+
+
+  <button class="buttoncss" type="submit">Buscar</button>
+  <a class=" buttoncss" href="/ejercicios/tarea5/busqueda_css" role="button">Mostrar todos</a>
+</form>
+
+
+{% endblock %}

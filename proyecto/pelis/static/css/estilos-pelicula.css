@@ -63,4 +63,15 @@ body.night .content p
 	cursor:pointer;
 	overflow: hidden;
 	outline:none;
+
+
+}
+
+.luna{
+	position: fixed;
+	top: 2em;
+	right: 1em;
+}
+.luna.active {
+	color: white;
 }

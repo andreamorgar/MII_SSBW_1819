@@ -14,8 +14,8 @@ class PelisForm(DocumentForm):
     class Meta:
         model = Pelis # nombre del modelo declarado en models.py
         # fields = ('title', 'plot', 'director', 'year', 'runtime')
-        fields = ["title","year"]
-# widgets = {"title": TextInput(attrs={"size":50,"class":"form-control"}),"rated":TextInput(attrs={"size":50,"class":"form-control"}), "director": TextInput(attrs={"size":50,"class":"form-control"}),"plot": Textarea(attrs={'cols': 50, 'rows': 4,"class":"form-control"}), "poster": TextInput(attrs={"size":50,"class":"form-control"}), "type":TextInput(attrs={"size":50,"class":"form-control"}),"year":NumberInput(attrs={"class":"form-control"}),"runtime":NumberInput(attrs={"class":"form-control"}),"metacritic":NumberInput(attrs={"class":"form-control"})}
+        fields = ["title","director","year",]
+        widgets = {"title": TextInput(attrs={"size":50,"class":"form-control"}),"director": TextInput(attrs={"size":50,"class":"form-control"})}
 
 class PelisView(DetailView):
     model = Pelis

@@ -375,3 +375,95 @@ def busqueda_pelis(request):
 
 
     return render(request,"ejercicios/main.html",context)
+
+
+
+
+
+
+def busqueda_pelis_css(request):
+    context = {}
+    lista = []
+
+    # obtener géneros
+    lista_pelis = pelis.find({})
+
+    generos = []
+    for pelicula in lista_pelis:
+        for genero in pelicula["genres"]:
+            generos.append(genero)
+
+    set_generos = set(generos)
+
+    if(request.method == 'POST'):
+        actor_formulario = request.POST.get('var_actor')
+        year_formulario = request.POST.get('var_year')
+        genero_formulario = request.POST.get('var_genres')
+        print(genero_formulario)
+    #     if actor_formulario != "" and year_formulario != "":
+    #         regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+    #         lista = pelis.find({"actors": regx, "year":int(year_formulario)})
+    #     elif year_formulario != "":
+    #         lista = pelis.find({"year":int(year_formulario)})
+    #     elif actor_formulario != "":
+    #         regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+    #         lista = pelis.find({"actors": regx})
+    #     else:
+    #         # lista = pelis.find()
+    #         lista = []
+    #
+
+        if actor_formulario != "" and year_formulario != "" and genero_formulario != "Seleccionar":
+            regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+            regx_genres = re.compile("^"+ genero_formulario, re.IGNORECASE)
+            lista = pelis.find({"actors": regx, "year":int(year_formulario),"genres": regx_genres})
+        elif genero_formulario != "Seleccionar":
+            regx_genres = re.compile("^"+ genero_formulario, re.IGNORECASE)
+            if year_formulario != "":
+                lista = pelis.find({"year":int(year_formulario),"genres": regx_genres})
+            elif actor_formulario != "":
+                regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+                lista = pelis.find({"actors": regx,"genres": regx_genres})
+            else:
+                regx_genres = re.compile("^"+ genero_formulario, re.IGNORECASE)
+        else:
+            if year_formulario != "":
+                lista = pelis.find({"year":int(year_formulario)})
+            elif actor_formulario != "":
+                regx = re.compile("^"+ actor_formulario, re.IGNORECASE)
+                lista = pelis.find({"actors": regx})
+            else:
+                lista = []
+
+
+
+        # necesario para quitar el float del año
+        lista_aux = [i for i in lista]
+        for i,peli in enumerate(lista_aux):
+            lista_aux[i]['year'] = int(peli['year'])
+
+        context = {
+            'value_genero':genero_formulario,
+            'value_actor': actor_formulario,
+            'value_year':year_formulario,
+            'lista': lista_aux,
+            'generos': list(set_generos),
+        }
+
+
+    else:
+        lista = pelis.find()
+        # necesario para quitar el float del año
+        lista_aux = [i for i in lista]
+        for i,peli in enumerate(lista_aux):
+            lista_aux[i]['year'] = int(peli['year'])
+
+
+        context = {
+            'lista': lista_aux,
+            'generos': list(set_generos),
+        }
+
+
+
+    return render(request,"ejercicios/main_c.html",context)

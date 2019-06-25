@@ -4,7 +4,7 @@
 <br/><br/>
 
 <form method="GET">
-    <button type="submit" formaction="{% url 'create' %}" class="btn btn-primary">Nueva película</button>
+    <button type="submit" formaction="{% url 'create' %}" class="btn btn-primary float-right mr-3 mb-3">Nueva película</button>
 </form>
 
   <table class="table table-sm table-hover" id="t1">
@@ -31,7 +31,7 @@
         <td> {{l.director}} </td>
         <td> {{l.year}} </td>
 
-        <td><a href="{% url 'read' l.id %}">Ver más</a> <a href="{% url 'edit' l.id %}">Editar</a> <a href="{% url 'delete' l.id %}">Eliminar</a></td>
+        <td><a href="{% url 'read' l.id %}"><i class="far fa-list-alt mr-3"></i></a> <a href="{% url 'edit' l.id %}"><i class="fas fa-pencil-alt mr-3"></i></a> <a href="{% url 'delete' l.id %}"><i class="fas fa-trash-alt"></i></a></td>
         <td>
 
           <button class="fa fa-thumbs-o-up botonLike" type="button" name="like_button" onclick="like('{{ l.id }}');" title="Like"></button>

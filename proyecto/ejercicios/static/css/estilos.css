@@ -48,3 +48,38 @@
 .line {
 	color: #E0E6F8;
 }
+
+
+
+
+/* -------------------------------------------- sin bootstrap */
+#t1 {
+	width: 100%;
+}
+
+
+tr { cursor: pointer; }
+
+/* para colorear fila si fila no */
+tr:nth-child(even) {background-color: #E0E6F8;}
+
+
+
+
+.buttoncss {
+	background-color: gray;
+	border: none;
+	color: white;
+	padding: 6px 20px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+
+#formulario_c {
+	text-align: center;
+}

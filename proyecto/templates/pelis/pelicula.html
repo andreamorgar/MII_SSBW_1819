@@ -3,8 +3,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   {% load static %}
+
   <link rel="stylesheet" type="text/css" href="{% static "css/estilos-pelicula.css" %}">
 
 
@@ -13,64 +15,87 @@
 </head>
 <body>
 
-  <h1>Título</h1>
-  <h6>{{ peli.title }}</h6>
-  <hr>
 
-  <h1>Resumen</h1>
-  <h6>{{ peli.plot }}</h6>
-  <hr>
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+          <img src="{{ url_imagen }}" alt="{{peli.title}}" style="position: fixed">
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-8">
+          <h5 class="titulo-obra">Título</h5>
+          <h6 class="titulo-obra-title">{{peli.title}}</h6>
+          <hr/>
+          <h5 class="autor-obra">Resumen</h5>
+          <h6 class="autor-obra-author">{{ peli.plot }}</h6>
+          <hr/>
+          <h5 class="titulo-obra">Año</h5>
+          <h6 class="titulo-obra-title">{{peli.year}}</h6>
+          <hr/>
+          <h5 class="titulo-obra">Director</h5>
+          <h6 class="titulo-obra-title">{{peli.director}}</h6>
 
-  <h1>Año</h1>
-  <h6>{{ peli.year }}</h6>
-  <hr>
+          <hr/>
+          <h5 class="titulo-obra">Premios</h5>
+          <h6 class="titulo-obra-title">{{peli.awards.text}}</h6>
+          <hr/>
+          <h5 class="titulo-obra">Galardones</h5>
+          <h6 class="titulo-obra-title">{{ galardones }}</h6>
+          <hr/>
+          <h5 class="titulo-obra">Nominaciones</h5>
+          <h6 class="titulo-obra-title">{{ nominaciones }}</h6>
 
-  <h1>Director</h1>
-  <h6>{{ peli.director }}</h6>
-  <hr>
+          <hr/>
+          <h5 class="titulo-obra">Premios</h5>
+          <h6 class="titulo-obra-title">{{peli.awards.text}}</h6>
+          <hr/>
 
-  <h1>Duración</h1>
-  <h6>{{ peli.runtime }}</h6>
-  <hr>
+          <h5 class="titulo-obra">Galardones</h5>
+          <h6 class="titulo-obra-title">{{galardones}}</h6>
+          <hr/>
 
-  <h1>Puntuación</h1>
-  <h6>{{ peli.rated }}</h6>
-  <hr>
+          <h5 class="titulo-obra">Nominaciones</h5>
+          <h6 class="titulo-obra-title">{{nominaciones}}</h6>
+          <hr/>
 
-  <h1>Géneros</h1>
-  {% for p in peli.genres %}
-  <h6>{{ p }}</h6>
-  {% endfor %}
-  <hr>
+          <h5 class="titulo-obra">Director</h5>
+          <h6 class="titulo-obra-title">{{peli.director}}</h6>
+          <hr/>
 
+          <h5 class="titulo-obra">Director</h5>
+          <h6 class="titulo-obra-title">{{peli.director}}</h6>
+          <hr/>
 
-  <h1>Premios: {{peli.awards.text}}</h1>
-  <h6> Galardones: {{ galardones }}</h6>
-  <h6>Nominaciones: {{ nominaciones }}</h6>
-  <hr>
+          <h5 class="titulo-obra">Puntuacion</h5>
+          <h6 class="titulo-obra-title">{{peli.rated}}</h6>
 
-  <h1>Poster</h1>
-  <img style="max-width:100%;" src="{{ url_imagen }}" />
-  <hr>
-  <h1>Géneros</h1>
-  {% for p in peli.actors %}
-  <h6>{{ p }}</h6>
-  {% endfor %}
-  <hr>
-  <h1>Guionistas</h1>
-  {% for p in peli.genres %}
-  <h6>{{ p }}</h6>
-  {% endfor %}
-  <hr>
-  <h1>Países</h1>
-  {% for p in peli.countries %}
-  <h6>{{ p }}</h6>
-  {% endfor %}
-  <hr>
+          <hr/>
+          <h5 class="autor-obra">Generos</h5>
+          <h6 class="autor-obra-author">
+              {% for p in peli.genres %}
+              <h6>{{ p }}</h6>
+              {% endfor %}
+          </h6>
 
-  <h1>Puntuación de IMDB {{peli.imdb.rating}}</h1>
-  <h6> Votos: {{ votos_imdb }}</h6>
-  <hr>
+          <hr/>
+          <h5 class="autor-obra">Guionistas</h5>
+          <h6 class="autor-obra-author">
+              {% for p in peli.writers %}
+              <h6>{{ p }}</h6>
+              {% endfor %}
+          </h6>
+
+          <hr/>
+          <h5 class="autor-obra">Países</h5>
+          <h6 class="autor-obra-author">
+              {% for p in peli.countries %}
+              <h6>{{ p }}</h6>
+              {% endfor %}
+          </h6>
+
+          <hr/>
+      </div>
+  </div>
+</div>
 
 
 </body>

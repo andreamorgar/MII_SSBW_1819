@@ -20,11 +20,13 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 
+
 from pelis import views
 
 urlpatterns = [
     url(r'^ejercicios/',include('ejercicios.urls')),
     url(r'^pelis/',include('pelis.urls')),
+
 
 
 
