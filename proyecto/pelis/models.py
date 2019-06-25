@@ -23,3 +23,4 @@ class Pelis(Document):
 	metacritic = IntField()
 	awards = DictField()
 	type = StringField()
+	likes = IntField()

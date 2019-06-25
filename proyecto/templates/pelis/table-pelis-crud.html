@@ -20,7 +20,8 @@
       <th width="30%">Título</th>
       <th width="30%">Director</th>
       <th width="10%">Año</th>
-      <th width="30%">Acciones</th>
+      <th width="20%">Acciones</th>
+      <th width="10%">Opinión</th>
     </tr>
 
     {% for l in lista %}
@@ -31,7 +32,11 @@
         <td> {{l.year}} </td>
 
         <td><a href="{% url 'read' l.id %}">Ver más</a> <a href="{% url 'edit' l.id %}">Editar</a> <a href="{% url 'delete' l.id %}">Eliminar</a></td>
+        <td>
 
+          <button class="fa fa-thumbs-o-up botonLike" type="button" name="like_button" onclick="like('{{ l.id }}');" title="Like"></button>
+          <button class="fa fa-thumbs-o-down botonLike" type="button" name="unlike_button" onclick="unlike('{{ l.id }}');" title="Unlike"></button>
+        </td>
       </tr>
     {% endfor %}
 

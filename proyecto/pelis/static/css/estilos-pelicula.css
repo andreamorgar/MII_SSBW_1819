@@ -8,7 +8,7 @@
 	text-align: center;
 }
 
-#hr1
+#hr1{
 	background-color: #96244e;
 	border: 0;
 	height: 3px;
@@ -35,4 +35,32 @@
 tr:nth-child(even) {background-color: #E0E6F8;}
 
 .tituloPeli { color: #96244e;}
+/*} es eso esa llave*/
+
+/* -------------------------------------------------------------------------- */
+body.night {
+    background-color: black;
+		color: white;
+}
+
+/* esto es para cambiar el color de las filas en modo nocturno */
+body.night tr:nth-child(even) {background-color: #444;}
+body.night tr:hover {background-color: #888;} /*cuando está sobre la fila*/
+body.night .tituloPeli { color: #96244e;}
+
+/* body.night .content h1,
+body.night .content p
+{
+    color: #fff;
+} */
+
+
+/* ------------------------------------------------------------------------- */
+.botonLike {
+	background-color: Transparent;
+	background-repeat:no-repeat;
+	border: none;
+	cursor:pointer;
+	overflow: hidden;
+	outline:none;
 }

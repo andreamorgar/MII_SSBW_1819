@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     # Tarea 12
     'rest_framework',
     'rest_framework_mongoengine',
+
+    # Tarea 13
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +73,10 @@ MIDDLEWARE = [
     # add tarea 9
     # 'django.contrib.sessions.middleware.SessionMiddleware',
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    # Tarea 13
+    'corsheaders.middleware.CorsMiddleware', # new
+    'django.middleware.common.CommonMiddleware', # new
 
 ]
 
@@ -212,3 +219,12 @@ SITE_ID = 1
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/pelis/tarea7/vista_crud' #necesario para poder hacer login
 LOGOUT_REDIRECT_URL = '/pelis/tarea7/vista_crud'
+
+
+
+
+# ------------------------------------------------------------------------------
+# Tarea 13
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'
+]

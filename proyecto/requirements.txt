@@ -5,3 +5,4 @@ django-mongoengine-forms==0.4.6
 django-allauth==0.39.1
 djangorestframework
 django-rest-framework-mongoengine
+django-cors-headers

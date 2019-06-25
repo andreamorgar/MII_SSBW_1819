@@ -194,9 +194,9 @@ def titulares(request):
     # tree = ElementTree.fromstring(response.content)
     texto = response.content
     res = re.findall(r'<title><!\[CDATA\[(.+?)\]\]><\/title>', response.text)
-    print(str(res))
-    print(type(res))
-    print("Numero titulares: "+ str(len(res)))
+    # print(str(res))
+    # print(type(res))
+    # print("Numero titulares: "+ str(len(res)))
 
 
     # salida = '''<html>
@@ -214,7 +214,7 @@ def titulares(request):
 
 def portada(request):
     url = 'http://ep00.epimg.net/rss/tecnologia/portada.xml'
-    response = requesyear_formulariots.get(url)
+    response = requests.get(url)
 
     # Primero obtenemos los titulares, de igual forma que antes
     texto = response.content
@@ -222,7 +222,7 @@ def portada(request):
     print("Numero titulares: "+ str(len(titulares_)))
 
     imagenes_ = re.findall(r'<enclosure url="(.+?)"', response.text)
-    print("Numero de imágenes: "+ str(len(imagenes_)))
+    # print("Numero de imágenes: "+ str(len(imagenes_)))
 
     # salida = '''<html>
     #                 blabla
@@ -230,9 +230,27 @@ def portada(request):
     #             '''
     # return HttpResponse(salida)
 
+    # context = {
+    # 'titulo':titulares_[0],
+    # 'lista': titulares_[1:] ,# los dos primeros no son info de titulares
+    # 'imagenes': imagenes_,
+    # }
+
+    info = []
+    seq = [1,3,5,7,9,11,13,15,17,19]
+    for i in range(0,10):
+        list_info = {}
+        list_info['titular'] = titulares_[1+i]
+        list_info['img'] = imagenes_[seq[i]]
+        # print(str(i+2-1))
+        info.append(list_info)
+        # info[titulares[1+i]] = imagenes_[(i+2)-1]
+
     context = {
     'titulo':titulares_[0],
-    'lista': titulares_[1:] # los dos primeros no son info de titulares
+    'info':info,
+    # 'lista': titulares_[1:] ,# los dos primeros no son info de titulares
+    # 'imagenes': imagenes_,
     }
     return render(request, 'ejercicios/titulares.html', context)
 

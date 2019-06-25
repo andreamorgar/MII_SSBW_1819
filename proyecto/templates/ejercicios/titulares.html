@@ -10,12 +10,36 @@
   </head>
 
   <body>
-    <h1>{{ titulo }}</h1>
-    <hr>
+    <h1 id="titulo">{{ titulo }}</h1>
+    <hr class="line">
 
-    {% for l in lista %}
-    <p id=p1>{{ l }}</p>
-    {% endfor %}
+
+    {% if lista %}
+
+        {% for l in lista %}
+        <p id=p1><b><i>{{ l }}</i></b></p>
+        {% endfor %}
+
+
+        {% if imagenes %}
+          <hr>
+          {% for imagen in imagenes %}
+          <img class="img" src="{{ imagen }}" />
+          {% endfor %}
+        {% endif %}
+
+     {% else %}
+
+             {% for i in info %}
+             <p id=p1><b><i>{{ i.titular }}</i></b></p>
+             <img class="img center" src="{{ i.img }}" />
+             <br /><br />
+             {% endfor %}
+
+    {% endif %}
+
+
+
   </body>
 
 </html>

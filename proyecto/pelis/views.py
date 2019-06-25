@@ -339,6 +339,42 @@ def vista_crud(request):
     return render(request,"pelis/mainCrud.html",context)
 
 
+
+
+# ==============================================================================
+# ==============================================================================
+# TAREA 11
+# ==============================================================================
+# ==============================================================================
+
+def incrementar_like(request):
+    print("holi")
+    # Obtenemos el ID de la película en cuestión con los datos del request
+    data = request.POST.get('id')
+    incrementa = request.POST.get('incrementa')
+    # print(incrementa)
+    peli = Pelis.objects().get(id=data)
+
+    if peli['likes'] is not None:
+        if incrementa == 'yes':
+            peli['likes'] += 1
+        else:
+            peli['likes'] -= 1
+        # print("entra no vacio")
+
+    else:
+        if incrementa == 'yes':
+            peli['likes'] = 1
+            # print("entra vacio")
+        else:
+            peli['likes'] = -1
+
+    peli.save()
+    print(data)
+
+    # return JsonResponse(data)
+    return HttpResponseRedirect(reverse('vamo'))
+
 # ==============================================================================
 # ==============================================================================
 # TAREA 12
@@ -422,11 +458,3 @@ def api_peli(request, id):
         peli.delete()
         #podemos devolver 200 o 404: https://www.restapitutorial.com/lessons/httpmethods.html
         return HttpResponse(status=200)
-
-
-
-
-
-# ------------------------------------------------------------------------------
-#  APIS desde clases viewsets
-# ------------------------------------------------------------------------------

@@ -23,6 +23,9 @@ urlpatterns = [
     path('tarea7/editar/<id>', views.editar_peli, name='edit'),
     path('tarea7/borrar/<id>', views.borrar_peli, name='delete'),
 
+    # Tarea 11
+    path('tarea11/like', views.incrementar_like, name='like'),
+
 
     # Tarea 12
     path('tarea12/api_pelis',    views.api_pelis),  # GET lista todas, POST añade

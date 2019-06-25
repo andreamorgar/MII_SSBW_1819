@@ -7,6 +7,8 @@
 
     <!-- <script src = "salida.html"</script> -->
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     {% load static %}
@@ -14,11 +16,50 @@
     <!-- <p style="color: #d1f2eb ;"> -->
     <title>Resultados</title>
 
+    <!-- Código para modo nocturno -->
+    <!-- http://www.onlinetutorialsweb.com/day-night-mode-switch-toggle-2-html-css-javascript/ -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){ // cuando carga la web
+            $('.toggle').click(function(){ // al pinchar los elementos que tengan class toggle
+                //alert("entra")
+                $('.toggle').toggleClass('active') // los elementos de la clase toggle se le añade una clase active, o se le quita
+                $('body').toggleClass('night') // al body se le añade una clase night o se le quita
+            })
+        })
+    </script>
+
+
+    <script>
+    function like(id) {
+                $.ajax({
+                    url: '/pelis/tarea11/like',
+                    headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                    data : {'id': id, 'incrementa':'yes'},
+                    method: "POST",
+                    dataType: 'json'
+                });
+            }
+
+    function unlike(id) {
+                $.ajax({
+                    url: '/pelis/tarea11/like',
+                    headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                    data : {'id': id, 'incrementa':'no'},
+                    method: "POST",
+                    dataType: 'json'
+                });
+            }
+    </script>
+
   </head>
-  <body >
+  <body>
+    <div></div>
+
     <div class="container">
       <div class="row">
         <div class="col-12"><h1 id="titulo">Buscador de películas</h1><hr></div>
+        <button class="toggle fa fa-moon-o botonLike" classtype="button" name="dark_light" title="Dark mode/Light mode"></button>
       </div>
       <div class="row">
           <div class="col-12">{% include "pelis/formulario-crud.html" %}</div>
@@ -30,7 +71,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </body>
