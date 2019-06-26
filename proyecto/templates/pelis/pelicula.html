@@ -22,54 +22,64 @@
           <img src="{{ url_imagen }}" alt="{{peli.title}}" style="position: fixed">
       </div>
       <div class="col-12 col-sm-6 col-md-6 col-lg-8">
-          <h5 class="titulo-obra">Título</h5>
+          <br/>
+          <h5 class="titulo-obra"><b>Título</b></h5>
           <h6 class="titulo-obra-title">{{peli.title}}</h6>
           <hr/>
-          <h5 class="autor-obra">Resumen</h5>
+          <h5 class="autor-obra"><b>Resumen</b></h5>
           <h6 class="autor-obra-author">{{ peli.plot }}</h6>
           <hr/>
-          <h5 class="titulo-obra">Año</h5>
+          <h5 class="titulo-obra"><b>Año</b></h5>
           <h6 class="titulo-obra-title">{{peli.year}}</h6>
           <hr/>
-          <h5 class="titulo-obra">Director</h5>
+          <h5 class="titulo-obra"><b>Director</b></h5>
           <h6 class="titulo-obra-title">{{peli.director}}</h6>
 
           <hr/>
-          <h5 class="titulo-obra">Premios</h5>
+          <h5 class="autor-obra"><b>Reparto</b></h5>
+          <h6 class="autor-obra-author">
+              {% for p in peli.actors %}
+              <h6>{{ p }}</h6>
+              {% endfor %}
+          </h6>
+
+          <hr/>
+
+          <h5 class="titulo-obra"><b>Premios</b></h5>
           <h6 class="titulo-obra-title">{{peli.awards.text}}</h6>
           <hr/>
-          <h5 class="titulo-obra">Galardones</h5>
+          <h5 class="titulo-obra"><b>Galardones</b></h5>
           <h6 class="titulo-obra-title">{{ galardones }}</h6>
           <hr/>
-          <h5 class="titulo-obra">Nominaciones</h5>
+          <h5 class="titulo-obra"><b>Nominaciones</b></h5>
           <h6 class="titulo-obra-title">{{ nominaciones }}</h6>
 
           <hr/>
-          <h5 class="titulo-obra">Premios</h5>
+          <h5 class="titulo-obra"><b>Premios</b></h5>
           <h6 class="titulo-obra-title">{{peli.awards.text}}</h6>
           <hr/>
 
-          <h5 class="titulo-obra">Galardones</h5>
+          <h5 class="titulo-obra"><b>Galardones</b></h5>
           <h6 class="titulo-obra-title">{{galardones}}</h6>
           <hr/>
 
-          <h5 class="titulo-obra">Nominaciones</h5>
+          <h5 class="titulo-obra"><b>Nominaciones</b></h5>
           <h6 class="titulo-obra-title">{{nominaciones}}</h6>
           <hr/>
 
-          <h5 class="titulo-obra">Director</h5>
+          <h5 class="titulo-obra"><b>Director</b></h5>
           <h6 class="titulo-obra-title">{{peli.director}}</h6>
           <hr/>
 
-          <h5 class="titulo-obra">Director</h5>
+          <h5 class="titulo-obra"><b>Director</b></h5>
           <h6 class="titulo-obra-title">{{peli.director}}</h6>
           <hr/>
 
-          <h5 class="titulo-obra">Puntuacion</h5>
+          <h5 class="titulo-obra"><b>Puntuación</b></h5>
           <h6 class="titulo-obra-title">{{peli.rated}}</h6>
 
           <hr/>
-          <h5 class="autor-obra">Generos</h5>
+          <h5 class="autor-obra"><b>Géneros</b></h5>
           <h6 class="autor-obra-author">
               {% for p in peli.genres %}
               <h6>{{ p }}</h6>
@@ -77,7 +87,7 @@
           </h6>
 
           <hr/>
-          <h5 class="autor-obra">Guionistas</h5>
+          <h5 class="autor-obra"><b>Guionistas</b></h5>
           <h6 class="autor-obra-author">
               {% for p in peli.writers %}
               <h6>{{ p }}</h6>
@@ -85,12 +95,17 @@
           </h6>
 
           <hr/>
-          <h5 class="autor-obra">Países</h5>
+          <h5 class="autor-obra"><b>Países</b></h5>
           <h6 class="autor-obra-author">
               {% for p in peli.countries %}
               <h6>{{ p }}</h6>
               {% endfor %}
           </h6>
+
+          <hr/>
+          <h5 class="titulo-obra"><b>Identificador</b></h5>
+          <h6 class="titulo-obra-title">{{peli.id}}</h6>
+
 
           <hr/>
       </div>

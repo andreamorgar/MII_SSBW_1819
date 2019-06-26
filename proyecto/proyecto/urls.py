@@ -20,8 +20,10 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 
+from django.views.generic.base import RedirectView
 
 from pelis import views
+from proyecto import views as views_
 
 urlpatterns = [
     url(r'^ejercicios/',include('ejercicios.urls')),
@@ -41,4 +43,8 @@ urlpatterns = [
     # para tarea 9
     path('accounts/', include('allauth.urls')),
     path('', views.vista_crud, name='vamo'),
+
+    url(r'logout', views_.logout, name='logout'),
+
+    url(r'^$', RedirectView.as_view(url='/pelis/tarea7/vista_crud', permanent=True), name='index'),
 ]

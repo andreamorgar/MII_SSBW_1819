@@ -18,7 +18,7 @@ urlpatterns = [
 
 
     path('ejercicio_pymongo/', views.pymongo), # entrada str
-    path('tarea5/actores_pymongo/<actor>', views.get_pelis_pymongo), # entrada str
+    path('tarea5/actores_pymongo/<year>', views.get_pelis_pymongo), # entrada str
     path('tarea5/busqueda', views.busqueda_pelis), # entrada str
 
     path('tarea5/busqueda_css', views.busqueda_pelis_css), # entrada str

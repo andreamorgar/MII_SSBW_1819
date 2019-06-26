@@ -30,6 +30,6 @@ urlpatterns = [
     # Tarea 12
     path('tarea12/api_pelis',    views.api_pelis),  # GET lista todas, POST añade
     path('tarea12/api_peli/<id>', views.api_peli),  # GET lista una,   PUT modifica, DELETE borrra
-
+    
     url('api', include(router.urls)), # Incluye todo el API CRUD -> http://localhost:8000/pelis/apipelis/
 	]

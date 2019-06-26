@@ -275,10 +275,10 @@ def pymongo(request):
     return render(request,"ejercicios/salida.html",context)
 
 
-def get_pelis_pymongo(request,actor):
+def get_pelis_pymongo(request,year):
     # busqueda = ".*"+ request.actor + ".*"
     # lista = pelis.find({"actors" : {$regex : }});
-    lista = pelis.find({"year":int(actor)})
+    lista = pelis.find({"year":int(year)})
 
 
     context = {
@@ -375,7 +375,6 @@ def busqueda_pelis(request):
 
 
     return render(request,"ejercicios/main.html",context)
-
 
 
 

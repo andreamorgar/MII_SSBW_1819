@@ -29,7 +29,7 @@ SECRET_KEY = '9urx(yi!ua(bbu(*&9=7$8a49rgksunx6nnjhhbik42c!@r)i7'
 # ALLOWED_HOSTS = []
 
 # Tarea 14
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -223,7 +223,7 @@ SITE_ID = 1
 # ------------------------------------------------------------------------------
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/pelis/tarea7/vista_crud' #necesario para poder hacer login
-LOGOUT_REDIRECT_URL = '/pelis/tarea7/vista_crud'
+# LOGOUT_REDIRECT_URL = '/pelis/tarea7/vista_crud'
 
 
 

@@ -1,5 +1,30 @@
-<h1>Film Delete</h1>
-<form method="post">{% csrf_token %}
-    Are you sure you want to delete "{{ object }}" ?
-    <input type="submit" value="Submit" />
-</form>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    
+    <style media="screen">
+      .aviso
+      {
+          	color: #ac2406;
+          	text-align: center;
+      }
+
+      .texto
+      {
+        	text-align: center;
+      }
+
+    </style>
+    <title>Borrar película</title>
+  </head>
+  <body>
+    <h1 class="aviso">Borrar película</h1>
+    <form class="texto" method="post">{% csrf_token %}
+      <b>¿Estás seguro de que quieres borrar la película?</b>
+        <br/><br/>
+        <input type="submit" value="Eliminar" />
+    </form>
+
+  </body>
+</html>

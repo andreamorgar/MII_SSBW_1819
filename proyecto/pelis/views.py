@@ -139,12 +139,14 @@ def busqueda_pelis(request):
         actor_formulario = request.POST.get('var_actor')
 
         # La primera letra de actor tiene que estar en mayúscula para que la búsqueda sea correcta
-        actor_formulario = actor_formulario[0].upper() + actor_formulario[1:]
+        # actor_formulario = actor_formulario[0].upper() + actor_formulario[1:]
         year_formulario = request.POST.get('var_year')
         genero_formulario = request.POST.get('var_genres')
         print(genero_formulario)
 
         if actor_formulario != "" and year_formulario != "" and genero_formulario != "Seleccionar":
+            # La primera letra de actor tiene que estar en mayúscula para que la búsqueda sea correcta
+            actor_formulario = actor_formulario[0].upper() + actor_formulario[1:]
             lista = Pelis.objects().filter(genres__contains = genero_formulario, year = int(year_formulario), actors__contains = actor_formulario)
             print(lista)
         elif genero_formulario != "Seleccionar":
@@ -153,13 +155,18 @@ def busqueda_pelis(request):
                 lista = Pelis.objects().filter(genres__contains = genero_formulario, year = int(year_formulario))
                 # lista = pelis.find({"year":int(year_formulario),"genres": regx_genres})
             elif actor_formulario != "":
+                # La primera letra de actor tiene que estar en mayúscula para que la búsqueda sea correcta
+                actor_formulario = actor_formulario[0].upper() + actor_formulario[1:]
                 lista = Pelis.objects().filter(genres__contains = genero_formulario, actors__contains = actor_formulario)
                 # lista = pelis.find({"actors": regx,"genres": regx_genres})
+            else:
+                print("entra aqui jeje")
+                lista = Pelis.objects().filter(genres__contains = genero_formulario)
 
         else:
             if year_formulario != "":
                 # lista = pelis.find({"year":int(year_formulario)})
-                lista = Pelis.objects().filter(year = int(year_formulario))
+                lista = Pelis.objects().filter(year = year_formulario)
             elif actor_formulario != "":
                 lista = Pelis.objects().filter(actors__contains = actor_formulario)
                 # lista = pelis.find({"actors": regx})
@@ -195,7 +202,6 @@ def busqueda_pelis(request):
 
 
     return render(request,"pelis/main.html",context)
-
 # # ----------------------------------------------------------------------------
 # # tarea 7 ------->  https://tutorial.djangogirls.org/es/django_forms/
 # ------------------------------------------------------------------------------
@@ -209,13 +215,18 @@ def post_new(request):
     # return render(request, 'pelis/post_edit.html', {'form': form})
     #https://medium.com/@siddharthshringi/how-i-made-my-first-django-app-4ede65c9b17f
     if request.method == 'POST':
+
         form = PelisForm(request.POST)
+        print("entra")
+        # print(form.fields['year'])
+        # form.fields['year'].initial = 2019
         if form.is_valid():
             form.save()
             # return redirect('/pelis/tarea7/vista_crud')
-            return HttpResponseRedirect(reverse('vamo'))
+            return HttpResponseRedirect('/pelis/tarea7/vista_crud')
     else:
         form = PelisForm()
+        form.fields['year'].initial = 2019
 
     return render(request, 'pelis/post_edit.html', {'form': form})
 
@@ -227,7 +238,9 @@ def editar_peli(request, id, template_name='pelis/post_edit.html'):
     form = PelisForm(request.POST or None, instance=peli)
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('vamo'))
+        # return HttpResponseRedirect(reverse('vamo'))
+        return HttpResponseRedirect('/pelis/tarea7/vista_crud')
+        
     return render(request, template_name, {'form':form})
 
 
@@ -240,7 +253,8 @@ def borrar_peli(request, id, template_name='pelis/film_confirm_delete.html'):
 
     if request.method=='POST':
         peli.delete()
-        return HttpResponseRedirect(reverse('vamo'))
+        # return HttpResponseRedirect(reverse('vamo'))
+        return HttpResponseRedirect('/pelis/tarea7/vista_crud')
 
     return render(request, template_name, {'object':peli})
 
@@ -327,7 +341,8 @@ def vista_crud(request):
         # necesario para quitar el float del año
         lista_aux = [i for i in lista]
         for i,peli in enumerate(lista_aux):
-            lista_aux[i]['year'] = int(peli['year'])
+            if lista_aux[i]['year'] is not None:
+                lista_aux[i]['year'] = int(peli['year'])
 
 
         context = {
